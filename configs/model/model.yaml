@@ -1,0 +1,13 @@
+# Optional[str] Model load weights from path.
+pretrained: null
+# [Unet, ]
+base: Unet
+# Encoder and weights values you can find in SMP docs.
+# https://smp.readthedocs.io/en/latest/
+encoder_name: resnet34
+# Use None to not download weights.
+encoder_weights: imagenet
+# In case of RGB images you should set in_channel = 3 and
+# in_channel = 1 for grayscale images.
+in_channels: 3
+classes: 2

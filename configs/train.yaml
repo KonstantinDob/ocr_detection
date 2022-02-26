@@ -1,0 +1,19 @@
+# [train, eval, inference]
+mode: train
+device: cuda
+epoch: 50
+batch_size: 4
+num_workers: 0
+project_path: /home/konstantin/workdir/ocr_detection/
+# [JaccardLoss, DiceLoss]
+loss_function: {name: JaccardLoss, smooth: 0}
+# [f_score, precision, recall, iou_score]
+metrics: {types: [f_score, precision, recall, iou_score],
+          threshold: 0.5}
+main_metrics: ['iou_score']
+# [Adam, SGD]
+optimizer: {name: Adam, lr: 0.001, momentum: 0.9}
+# [LinearLR, LambdaLR, None]
+scheduler: {'name': 'LinearLR', factor: 0.999}
+# early stopping patience
+patience: 10

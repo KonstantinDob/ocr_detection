@@ -1,0 +1,19 @@
+datapath: /home/konstantin/workdir/ocr_detection/dataset
+# Allow to load all dataset in the RAM. Be careful when working with
+# large datasets or small amounts of RAM.
+all_in_memory: True
+image_size: [800, 800]
+mask_channel: 2
+mean: [114.6, 119.5, 128.6]
+std: [77.8, 76.0, 78.2]
+# Augmentations.
+augmentations:
+  blur: 0.9
+  median_blur: 0.9
+  gray: 0.9
+  clahe: 0.9
+  brightness_contrast: 0.9
+  gamma: 0.9
+  image_comprehension: {quality_lower: 75, p: 0.9}
+  flipud: 0.5
+  fliplr: 0.5
