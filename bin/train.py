@@ -1,25 +1,21 @@
 import yaml
-from os.path import join
 from typing import Dict, Any
 from ocr_detection.builder.builder import OCRDet
 
 
-def create_main_config(folder_path: str) -> Dict[str, Any]:
+def create_main_config() -> Dict[str, Any]:
     """Merge all configs to one.
-
-    Args:
-        folder_path (str): Path to the directory.
 
     Returns:
         Dict[str, Any]: Main config that contain all data.
     """
-    with open(join(folder_path, 'configs/data/dataset.yaml'), 'r') \
+    with open('./configs/data/dataset.yaml', 'r') \
             as file:
         data_config = yaml.safe_load(file)
-    with open(join(folder_path, 'configs/model/model.yaml'), 'r') \
+    with open('./configs/model/model.yaml', 'r') \
             as file:
         model_config = yaml.safe_load(file)
-    with open(join(folder_path, 'configs/train.yaml'), 'r') as file:
+    with open('./configs/train.yaml', 'r') as file:
         train_config = yaml.safe_load(file)
 
     config = {}
@@ -31,7 +27,7 @@ def create_main_config(folder_path: str) -> Dict[str, Any]:
 
 
 def main():
-    config = create_main_config(folder_path='./')
+    config = create_main_config()
     ocr_det = OCRDet(config)
     ocr_det.train()
 

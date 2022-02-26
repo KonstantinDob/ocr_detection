@@ -14,8 +14,7 @@ def create_main_config() -> Dict[str, Any]:
     Returns:
         Dict[str, Any]: Main config that contain all data.
     """
-    with open('/home/konstantin/workdir/ocr_detection/'
-              'configs/inference.yaml', 'r') as file:
+    with open('./configs/inference.yaml', 'r') as file:
         config = yaml.safe_load(file)
 
     return config
@@ -26,8 +25,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         '--datapath',
         type=str,
-        default='/home/konstantin/workdir/ocr_detection/'
-                'dataset/inference'
+        default='./dataset/inference'
     )
 
     args = parser.parse_args()
