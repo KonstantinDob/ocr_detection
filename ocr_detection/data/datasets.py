@@ -74,7 +74,7 @@ class OCRDetDataset(Dataset):
         if [] in [self.images, self.labels]:
             raise FileNotFoundError("Dataset is empty!")
 
-        LOGGER.info(f'Data have loaded')
+        LOGGER.info('Data have loaded')
 
     def get_pair(self, index) -> Tuple[np.ndarray, np.ndarray]:
         """Get image/label pair. Label processed to mask.
