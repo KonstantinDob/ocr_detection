@@ -9,8 +9,7 @@ def create_main_config() -> Dict[str, Any]:
     Returns:
         Dict[str, Any]: Main config that contain all data.
     """
-    with open('/home/konstantin/workdir/'
-              'ocr_detection/configs/eval.yaml', 'r') as file:
+    with open('./configs/eval.yaml', 'r') as file:
         eval_config = yaml.safe_load(file)
 
     return eval_config
