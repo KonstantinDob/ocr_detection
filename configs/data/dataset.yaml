@@ -1,4 +1,4 @@
-datapath: /home/konstantin/workdir/ocr_detection/dataset
+datapath: ./dataset
 # Allow to load all dataset in the RAM. Be careful when working with
 # large datasets or small amounts of RAM.
 all_in_memory: True
