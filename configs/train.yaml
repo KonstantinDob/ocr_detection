@@ -4,7 +4,7 @@ device: cuda
 epoch: 50
 batch_size: 4
 num_workers: 0
-project_path: /home/konstantin/workdir/ocr_detection/
+project_path: ./
 # [JaccardLoss, DiceLoss]
 loss_function: {name: JaccardLoss, smooth: 0}
 # [f_score, precision, recall, iou_score]

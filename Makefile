@@ -1,4 +1,4 @@
-NAME ?= text_detection
+NAME ?= ocr_detection
 GPUS ?= all
 
 build:

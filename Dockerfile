@@ -41,5 +41,5 @@ RUN pip3 install --upgrade --no-cache-dir \
     packaging==21.2
 
 # Install python packages
-COPY . /workdir
+COPY ./requirements.txt /workdir
 RUN pip3 install -r ./requirements.txt
