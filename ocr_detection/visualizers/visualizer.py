@@ -4,7 +4,7 @@ from typing import Dict, List, Any
 
 
 def to_rgb(image: np.ndarray) -> np.ndarray:
-    """Check that the image is in RGN format.
+    """Check that the image is in RGB format.
 
     In grayscale case convert the image to rhe RGB.
     """
