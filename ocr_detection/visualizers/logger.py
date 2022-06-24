@@ -8,7 +8,7 @@ def create_logger() -> logging.Logger:
         logging.Logger: General logger.
     """
     logging.basicConfig(format="%(message)s", level=logging.INFO)
-    logger = logging.getLogger('gyomei_detection')
+    logger = logging.getLogger('ocr_detection')
     return logger
 
 

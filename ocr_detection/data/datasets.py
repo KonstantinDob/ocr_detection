@@ -90,8 +90,8 @@ class OCRDetDataset(Dataset):
         if self.config['all_in_memory']:
             return self.images[index], self.labels[index]
         else:
-            image = cv2.imread(np.uint8(self.images[index]))
-            label = np.load(np.uint8(self.labels[index]))
+            image = np.uint8(cv2.imread(self.images[index]))
+            label = np.uint8(np.load(self.labels[index]))
             return image, label
 
     def __len__(self):
