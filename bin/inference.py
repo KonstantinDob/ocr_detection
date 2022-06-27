@@ -37,7 +37,6 @@ def main():
     config = create_main_config()
 
     inference = InferenceOCRDet(config)
-    inference.trainer.model.load_model(config['pretrained'])
     args = parse_arguments()
 
     image_names = os.listdir(args.datapath)
@@ -49,7 +48,7 @@ def main():
         image = inference.visualize(image=image, prediction=prediction)
 
         cv2.imshow('Result', image)
-        cv2.waitKey()
+        cv2.waitKey(10)
 
 
 if __name__ == "__main__":
