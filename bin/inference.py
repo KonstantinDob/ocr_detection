@@ -48,7 +48,7 @@ def main():
         image = inference.visualize(image=image, prediction=prediction)
 
         cv2.imshow('Result', image)
-        cv2.waitKey(10)
+        cv2.waitKey()
 
 
 if __name__ == "__main__":

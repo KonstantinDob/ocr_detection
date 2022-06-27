@@ -20,8 +20,8 @@ class InferenceOCRDet:
     def __init__(self, config: Dict[str, Any]):
         LOGGER.info('Creating OCR Detection')
         self._augmentor: Optional[Augmentor] = None
-        self._model: Optional[torch.nn.Module] = None
         self._visual: Optional[VisualDrawer] = None
+        self.model: Optional[torch.nn.Module] = None
 
         self.config = config
         self.device = self.config['device']
@@ -35,8 +35,8 @@ class InferenceOCRDet:
         model = create_model(self.config)
 
         self._visual = VisualDrawer(config=self.config)
-        self._model = Model(model, None, None, self.config['device'])
-        self._model.load_model(file_path=self.config['pretrained'])
+        self.model = Model(model, None, None, self.config['device'])
+        self.model.load_model(file_path=self.config['pretrained'])
 
     def _find_contours(self, mask: np.ndarray) -> List[np.ndarray]:
         """Find contours on predicted mask.
@@ -93,7 +93,7 @@ class InferenceOCRDet:
         image = self.augmentor.resize_normalize(image=image,
                                                 is_mask=False)
         image = to_tensor(image).unsqueeze(0)
-        prediction_mask = self._model.predict(
+        prediction_mask = self.model.predict(
             image)[0].cpu().detach().numpy()
 
         prediction = self._find_contours(mask=prediction_mask)
