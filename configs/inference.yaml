@@ -1,6 +1,6 @@
 mode: inference
 device: cuda
-pretrained: ./experiments/Unet_resnet34_0/models/best_Unet.pth
+pretrained: ./experiments/run_0/models/best_Unet.pth
 mean: [114.6, 119.5, 128.6]
 std: [77.8, 76.0, 78.2]
 image_size: [800, 800]

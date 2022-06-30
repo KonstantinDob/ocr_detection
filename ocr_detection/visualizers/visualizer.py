@@ -23,7 +23,7 @@ class VisualDrawer:
     def __init__(self, config: Dict[str, Any]):
         self.config = config
 
-    def _prediction_to_original_size(
+    def prediction_to_original_size(
             self, prediction: List[np.ndarray], height: int, width: int
     ) -> List[np.ndarray]:
         """Restore the mask to original image size.
@@ -64,10 +64,5 @@ class VisualDrawer:
             np.ndarray(w, h, 3): Image with contours.
         """
         image = to_rgb(image=image)
-        height, width = image.shape[:2]
-
-        prediction = self._prediction_to_original_size(prediction,
-                                                       height, width)
-
         cv2.drawContours(image, prediction, -1, (0, 0, 255), 3)
         return image

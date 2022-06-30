@@ -16,7 +16,7 @@ class BaseInferenceOCRDet:
     def __init__(self, config: Dict[str, Any]):
         LOGGER.info('Creating OCR Detection')
         self._augmentor: Optional[Augmentor] = None
-        self._visual: Optional[VisualDrawer] = None
+        self.visual: Optional[VisualDrawer] = None
         self.model: Optional[torch.nn.Module] = None
 
         self.config = config
@@ -63,8 +63,8 @@ class BaseInferenceOCRDet:
         Returns:
             np.ndarray: Image with contours.
         """
-        self._visual.visualize_prediction(image=image,
-                                          prediction=prediction)
+        self.visual.visualize_prediction(image=image,
+                                         prediction=prediction)
         return image
 
     @abc.abstractmethod
