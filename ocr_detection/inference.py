@@ -25,7 +25,7 @@ class InferenceOCRDet(BaseInferenceOCRDet):
         """Create Gyomei trainer."""
         model = create_model(self.config)
 
-        self._visual = VisualDrawer(config=self.config)
+        self.visual = VisualDrawer(config=self.config)
         self.model = Model(model, None, None, self.config['device'])
         self.model.load_model(file_path=self.config['pretrained'])
 
@@ -40,6 +40,7 @@ class InferenceOCRDet(BaseInferenceOCRDet):
             List[np.ndarray]: List with predicted contours.
         """
         image = to_rgb(image=image)
+        height, width = image.shape[:2]
         image = self.augmentor.resize_normalize(image=image,
                                                 is_mask=False)
         image = to_tensor(image).unsqueeze(0)
@@ -47,5 +48,7 @@ class InferenceOCRDet(BaseInferenceOCRDet):
             image)[0].cpu().detach().numpy()
 
         prediction = self._find_contours(mask=prediction_mask)
+        prediction = self.visual.prediction_to_original_size(
+            prediction, height, width)
 
         return prediction
