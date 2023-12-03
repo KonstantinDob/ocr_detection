@@ -1,16 +1,23 @@
 NAME ?= ocr_detection
 GPUS ?= all
 
+.PHONY: build
 build:
 	docker build -t $(NAME) .
 
+.PHONY: run
 run:
-	docker run --rm -it \
-		--gpus=$(GPUS) \
+	docker run --rm -dit \
 		-v $(shell pwd):/workdir \
 		--name=$(NAME) \
 		$(NAME)
 
+.PHONY: stop
+stop:
+	-docker stop $(NAME)
+	-docker rm $(NAME)
+
+.PHONY: train
 train:
 	docker run --rm \
 		--gpus=$(GPUS) \
@@ -18,3 +25,27 @@ train:
 		--name=$(NAME) \
 		$(NAME) \
 		python ./bin/train.py
+
+.PHONY: style
+style:
+	git config --global --add safe.directory /workdir && pre-commit run --verbose --files ocr_detection/*
+
+.PHONY: test-cov
+test-cov:
+	docker run --rm \
+		-v $(shell pwd):/workdir \
+		--name=$(NAME) \
+		$(NAME) \
+		pytest \
+			-p no:logging \
+			--cache-clear \
+			--cov ocr_detection/builder \
+			--cov ocr_detection/data \
+			--cov ocr_detection/metrics \
+			--cov ocr_detection/model \
+			--cov ocr_detection/modules \
+			--cov ocr_detection/visualizers \
+			--junitxml=pytest.xml \
+			--cov-report term-missing:skip-covered \
+			--cov-report xml:coverage.xml \
+			tests
