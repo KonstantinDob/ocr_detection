@@ -38,7 +38,7 @@ class BaseInferenceOCRDet:
             mask (np.ndarray): Prediction mask.
 
         Returns:
-            list of np.ndarray: Contours on prediction mask.
+            list of np.ndarray: Contours on the prediction mask.
         """
         output_contours = []
 
