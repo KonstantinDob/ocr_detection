@@ -1,38 +1,38 @@
 from typing import Dict, Any, Optional
 
-from ocr_detection.model.model import create_model
-from ocr_detection.data.datasets import create_dataloaders_pair
-from ocr_detection.data.augmentations import Augmentor
-from ocr_detection.metrics.metrics import create_metrics
-from ocr_detection.metrics.loss import create_loss_function
-from ocr_detection.modules.lr_scheduler import create_scheduler
-from ocr_detection.modules.optimizer import create_optimizer
-from ocr_detection.visualizers.logger import LOGGER
-from ocr_detection.visualizers.visualizer import VisualDrawer
+from ocr_detection.model import create_model
+from ocr_detection.data import Augmentor
+from ocr_detection.data import create_dataloaders_pair
+from ocr_detection.metrics import create_metrics, create_loss_function
+from ocr_detection.modules import create_optimizer, create_scheduler
+from ocr_detection.visualizers import LOGGER
+from ocr_detection.visualizers import VisualDrawer
 
 from gyomei_trainer.model import Model
 from gyomei_trainer.builder import Builder
 
 
 class OCRDet:
-    """Class for training and evaluation.
+    """Class for training and evaluation."""
 
-    Args:
-        config (Dict[str, Any]): Config with initial data.
-    """
     def __init__(self, config: Dict[str, Any]):
-        LOGGER.info('Creating OCR Detection')
+        """OCR detection class constructor.
+
+        Args:
+            config (Dict[str, Any]): Config with initial data.
+        """
+        LOGGER.info("Creating OCR Detection")
         self.augmentor: Optional[Augmentor] = None
         self._visual: Optional[VisualDrawer] = None
         self.trainer: Optional[Builder] = None
 
         self.config = config
-        self.device = self.config['device']
-        if self.config['mode'] == 'inference':
+        self.device = self.config["device"]
+        if self.config["mode"] == "inference":
             self.augmentor = Augmentor(False, self.config)
             self._visual = VisualDrawer(config=self.config)
         self._create_modules()
-        LOGGER.info('OCR Detection is created')
+        LOGGER.info("OCR Detection is created")
 
     def _create_modules(self):
         """Create Gyomei trainer."""
@@ -47,13 +47,13 @@ class OCRDet:
         data = self._get_aux_params()
 
         gyomei_model = Model(model, optimizer,
-                             loss, self.config['device'])
+                             loss, self.config["device"])
         self.trainer = Builder(
             model=gyomei_model, train_loader=train_dataloader,
-            valid_loader=test_dataloader, num_epoch=data['epoch'],
-            metrics=metrics_dict, main_metrics=data['main_metrics'],
-            scheduler=scheduler, project_path=data['project_path'],
-            early_stopping_patience=data['patience']
+            valid_loader=test_dataloader, num_epoch=data["epoch"],
+            metrics=metrics_dict, main_metrics=data["main_metrics"],
+            scheduler=scheduler, project_path=data["project_path"],
+            early_stopping_patience=data["patience"]
         )
 
     def _get_aux_params(self):
@@ -62,8 +62,7 @@ class OCRDet:
         Returns:
             Dict[str, Any]: Dict with auxiliary parameters.
         """
-        data = {'epoch': None, 'main_metrics': None,
-                'patience': None, 'project_path': None}
+        data = {"epoch": None, "main_metrics": None, "patience": None, "project_path": None}
         for key, val in data.items():
             if key in self.config:
                 data[key] = self.config[key]
