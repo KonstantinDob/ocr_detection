@@ -9,11 +9,9 @@ def create_main_config() -> Dict[str, Any]:
     Returns:
         Dict[str, Any]: Main config that contain all data.
     """
-    with open('./configs/data/dataset.yaml', 'r') \
-            as file:
+    with open('./configs/data/dataset.yaml', 'r') as file:
         data_config = yaml.safe_load(file)
-    with open('./configs/model/model.yaml', 'r') \
-            as file:
+    with open('./configs/model/model.yaml', 'r') as file:
         model_config = yaml.safe_load(file)
     with open('./configs/train.yaml', 'r') as file:
         train_config = yaml.safe_load(file)

@@ -40,8 +40,7 @@ def main():
     args = parse_arguments()
 
     image_names = os.listdir(args.datapath)
-    image_paths = [os.path.join(args.datapath, image_name) for
-                   image_name in image_names]
+    image_paths = [os.path.join(args.datapath, image_name) for image_name in image_names]
     for image_path in tqdm(image_paths):
         image = cv2.imread(image_path)
         prediction = inference.predict(image=image)

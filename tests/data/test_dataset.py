@@ -35,6 +35,9 @@ class TestDataset:
 
         """
         config = load_config
+        # Use it when you can not get the data
+        config["is_dummy"] = False if created is False else True
+
         if datapath != 'same':
             config['datapath'] = datapath
 
