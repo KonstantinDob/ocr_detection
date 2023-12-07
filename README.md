@@ -64,3 +64,21 @@ Run train without interactive mode:
 ```
 make train
 ```
+
+Stop container:
+
+```
+make stop
+```
+
+Check code style:
+
+```
+make style
+```
+
+Run test coverage:
+
+```
+make test-cov
+```
