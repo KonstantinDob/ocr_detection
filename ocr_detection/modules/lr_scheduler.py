@@ -11,7 +11,7 @@ def create_scheduler(
     """Create the learning rate scheduler.
 
     Args:
-        main_config (Dict[str, Any]): Config with initial data.
+        main_config (dict of str: Any): Config with initial data.
         optimizer (torch.optim.Optimizer): Current optimizer.
 
     Returns:

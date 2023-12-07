@@ -10,10 +10,10 @@ def create_loss_function(main_config: Dict[str, Any]) -> Optional[torch.nn.Modul
     """Create loss function also based on SMP.
 
     Args:
-        main_config (Dict[str, Any]): Config with initial data.
+        main_config (dict os str: Any): Config with initial data.
 
     Returns:
-        Optional[torch.nn.Module]: Created loss function.
+        torch.nn.Module, optional: Created loss function.
 
     Raises:
         KeyError: Raise when incorrect loss name pass.

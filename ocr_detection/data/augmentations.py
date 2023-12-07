@@ -31,7 +31,7 @@ class Augmentor:
 
         Args:
             augment (bool): Whether to use augmentation.
-            config (Dict[str, Any]): Config with augmentation parameters.
+            config (dict of str: Any): Config with augmentation parameters.
                 Can be None in case of turned off augmentations.
         """
         self.transform: Optional[A.Compose] = None

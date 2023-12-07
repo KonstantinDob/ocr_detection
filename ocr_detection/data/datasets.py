@@ -20,10 +20,14 @@ class OCRDetDataset(Dataset):
     def __init__(self, mode: str, config: Optional[Dict[str, Any]] = None):
         """OCR dataset constructor.
 
+        If you can not get the data, you should set in dataset.yaml confid
+        dummy_dataset to Trur. In this case you will run randomly created data for debug
+        and tests.
+
         Args:
             mode (str): What part of the dataset should be loaded.
                 Can take the following values {'train', 'test', 'tal'}.
-            config (Optional[Dict[str, Any]]): Dataset config. If None
+            config (dict of str: Any, optional): Dataset config. If None
                 load config from default path. Default is None.
 
         Raises:
@@ -132,8 +136,7 @@ class OCRDetDataset(Dataset):
             index (int):The index of the returned image/mask pair in the dataset.
 
         Returns:
-            Tuple[np.ndarray(w, h, 3), np.ndarray(w, h, nc)]: Image/mask
-                pair in the dataset prepared for loading into NN.
+            tuple of np.ndarray: Image/mask pair in the dataset prepared for loading into NN.
         """
         image, mask = self.get_pair(index)
         if self.augment:
@@ -153,7 +156,7 @@ def create_dataloaders_pair(main_config: Dict[str, Any]):
     """Create dataloaders for eval/train mode.
 
     Args:
-        main_config (Dict[str, Any]): Config with initial data.
+        main_config (dict of str: Any): Config with initial data.
 
     Returns:
         tuple of DataLoader: Tuple with train and valid dataloader.
@@ -185,7 +188,7 @@ def create_dataloader(batch_size: int, mode: str, config: Dict[str, Any]) -> Dat
     Args:
         batch_size (int): Required batch size.
         mode (str): What mode should be loaded.
-        config (Dict[str, Any]): Dataset config. Path is: project/configs/data/dataset.yaml.
+        config (dict of str: Any): Dataset config. Path is: project/configs/data/dataset.yaml.
 
     Returns:
         DataLoader: Created dataloader.

@@ -12,7 +12,7 @@ def create_metrics(main_config: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         main_config (dict of str: Any): Config with initial data.
 
     Returns:
-        Optional[dict of str: Any]: Dict with metrics.
+        dict of str: Any, optional: Dict with metrics.
 
     Raises:
         AttributeError: Raise when metrics not pass.
